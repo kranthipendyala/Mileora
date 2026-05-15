@@ -1,0 +1,35 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1,
+    "analysis": {
+      "analyzer": {
+        "mileora_text": {
+          "tokenizer": "standard",
+          "filter": ["lowercase", "asciifolding"]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "id":          { "type": "keyword" },
+      "slug":        { "type": "keyword" },
+      "name":        { "type": "text",  "analyzer": "mileora_text",
+                       "fields": { "raw": { "type": "keyword" } } },
+      "deity":       { "type": "text",  "analyzer": "mileora_text",
+                       "fields": { "raw": { "type": "keyword" } } },
+      "temple":      { "type": "text",  "analyzer": "mileora_text",
+                       "fields": { "raw": { "type": "keyword" } } },
+      "city":        { "type": "keyword" },
+      "description": { "type": "text",  "analyzer": "mileora_text" },
+      "image_url":   { "type": "keyword", "index": false },
+      "price_paise": { "type": "integer" },
+      "duration_minutes": { "type": "short" },
+      "features":    { "type": "keyword" },
+      "featured":    { "type": "boolean" },
+      "status":      { "type": "keyword" },
+      "next_date":   { "type": "date" }
+    }
+  }
+}

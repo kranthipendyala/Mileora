@@ -1,0 +1,17 @@
+{
+  "name": "Mileora — Astrology, Numerology, Vasthu, Jothisyam & Puja",
+  "short_name": "Mileora",
+  "description": "Trusted astrologers, kundli, numerology, vasthu, and online puja booking — all in one place.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0a14",
+  "theme_color": "#0b0a14",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "en-IN",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "categories": ["lifestyle", "spirituality", "wellness"]
+}

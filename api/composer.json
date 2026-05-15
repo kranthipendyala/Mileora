@@ -1,0 +1,20 @@
+{
+    "name": "mileora/api",
+    "description": "Mileora REST API — CodeIgniter 3 + PHP 8.1",
+    "type": "project",
+    "require": {
+        "php": "^8.1",
+        "codeigniter/framework": "3.1.13",
+        "chriskacerguis/codeigniter-restserver": "^3.2",
+        "firebase/php-jwt": "^6.10",
+        "razorpay/razorpay": "^2.9",
+        "elasticsearch/elasticsearch": "^8.13",
+        "vlucas/phpdotenv": "^5.6",
+        "guzzlehttp/guzzle": "^7.8"
+    },
+    "config": {
+        "platform": {
+            "php": "8.1.0"
+        }
+    }
+}

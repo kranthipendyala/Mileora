@@ -1,0 +1,7 @@
+vendor/
+system/
+application/config/.env
+application/cache/*
+application/logs/*
+!application/cache/.gitkeep
+!application/logs/.gitkeep

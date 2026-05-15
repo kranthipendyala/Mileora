@@ -1,0 +1,63 @@
+# --- Dependencies ---
+node_modules/
+vendor/
+.pnp
+.pnp.js
+
+# --- Build outputs ---
+.next/
+out/
+dist/
+build/
+web-build/
+
+# --- Env files (NEVER commit) ---
+.env
+.env.local
+.env.*.local
+**/application/config/.env
+
+# --- CI3 framework system folder (installed via composer) ---
+api/system/
+
+# --- Caches & logs ---
+.cache/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+api/application/cache/*
+api/application/logs/*
+!api/application/cache/.gitkeep
+!api/application/logs/.gitkeep
+
+# --- PWA service worker (auto-generated) ---
+web/public/sw.js
+web/public/workbox-*.js
+web/public/worker-*.js
+web/public/sw.js.map
+web/public/workbox-*.js.map
+web/public/worker-*.js.map
+
+# --- Expo / React Native ---
+mobile/.expo/
+mobile/ios/
+mobile/android/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# --- TS build info ---
+*.tsbuildinfo
+
+# --- OS / IDE ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo

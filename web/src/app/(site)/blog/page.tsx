@@ -9,7 +9,7 @@ import { ARTICLES } from "@/lib/mock-data";
 export const metadata: Metadata = buildMetadata({
   title: "Mileora Blog — Astrology, Numerology, Vasthu, Puja insights",
   description:
-    "Plain-language articles on Vedic astrology, numerology, vasthu shastra, Tamil jothisyam, and online puja — written by verified experts.",
+    "Plain-language articles on Vedic astrology, numerology, vasthu shastra, Tamil jothisyam, and online puja — written by verified guides.",
   path: "/blog",
 });
 
@@ -31,7 +31,7 @@ export default function Blog() {
             Wisdom you can <span className="text-gradient-gold">actually use</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-[color:var(--color-text-muted)]">
-            Plain-language articles from verified astrologers, numerologists, vasthu experts, and temple priests.
+            Plain-language articles from verified astrologers, numerologists, vasthu guides, and temple priests.
           </p>
         </div>
       </section>

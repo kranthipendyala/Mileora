@@ -12,12 +12,30 @@ $route['translate_uri_dashes'] = FALSE;
 // Health
 $route['api/v1/health']['get'] = 'api/health/index';
 
-// Auth
-$route['api/v1/auth/register']['post']    = 'api/auth/register';
-$route['api/v1/auth/verify-otp']['post']  = 'api/auth/verify_otp';
-$route['api/v1/auth/login']['post']       = 'api/auth/login';
-$route['api/v1/auth/refresh']['post']     = 'api/auth/refresh';
-$route['api/v1/auth/me']['get']           = 'api/auth/me';
+// Auth — user (phone OTP)
+$route['api/v1/auth/register']['post']        = 'api/auth/register';
+$route['api/v1/auth/verify-otp']['post']      = 'api/auth/verify_otp';
+$route['api/v1/auth/login']['post']           = 'api/auth/login';
+$route['api/v1/auth/refresh']['post']         = 'api/auth/refresh';
+$route['api/v1/auth/me']['get']               = 'api/auth/me';
+
+// Auth — guide (phone OTP, must already exist via /guide/apply)
+$route['api/v1/auth/guide/send-otp']['post'] = 'api/auth/guide_send_otp';
+$route['api/v1/auth/guide/verify']['post']   = 'api/auth/guide_verify';
+
+// Auth — admin (email + password, no OTP)
+$route['api/v1/auth/admin/login']['post']     = 'api/auth/admin_login';
+
+// Guide portal (require guide JWT unless noted)
+$route['api/v1/guide/apply']['post']     = 'api/guide/apply';
+$route['api/v1/guide/me']['get']         = 'api/guide/me';
+$route['api/v1/guide/dashboard']['get']  = 'api/guide/dashboard';
+
+// Admin console (require admin JWT)
+$route['api/v1/admin/dashboard']['get']               = 'api/admin/dashboard';
+$route['api/v1/admin/users']['get']                   = 'api/admin/users';
+$route['api/v1/admin/guides']['get']                 = 'api/admin/guides';
+$route['api/v1/admin/guides/(:num)/approve']['post'] = 'api/admin/approve_guide/$1';
 
 // Astrologers
 $route['api/v1/astrologers']['get']                    = 'api/astrologers/index';
@@ -53,6 +71,68 @@ $route['api/v1/search/suggest']['get']     = 'api/search/suggest';
 $route['api/v1/reports/kundli']['post']     = 'api/reports/kundli';
 $route['api/v1/reports/numerology']['post'] = 'api/reports/numerology';
 $route['api/v1/reports/vasthu']['post']     = 'api/reports/vasthu';
+
+// Geo
+$route['api/v1/cities']['get']           = 'api/cities/index';
+$route['api/v1/cities/(:any)']['get']    = 'api/cities/show/$1';
+$route['api/v1/localities']['get']       = 'api/localities/index';
+
+// User address book (JWT)
+$route['api/v1/addresses']['get']                  = 'api/addresses/index';
+$route['api/v1/addresses']['post']                 = 'api/addresses/create';
+$route['api/v1/addresses/(:num)']['put']           = 'api/addresses/update/$1';
+$route['api/v1/addresses/(:num)']['delete']        = 'api/addresses/delete/$1';
+
+// Reviews
+$route['api/v1/reviews']['get']                    = 'api/reviews/index';
+$route['api/v1/reviews']['post']                   = 'api/reviews/create';
+$route['api/v1/reviews/(:num)/hide']['post']       = 'api/reviews/hide/$1';
+
+// OTP (centralized — server-key gated)
+$route['api/v1/otp/send']['post']                  = 'api/otp/send';
+$route['api/v1/otp/verify']['post']                = 'api/otp/verify';
+
+// Notifications + push (JWT)
+$route['api/v1/notifications']['get']              = 'api/notifications/index';
+$route['api/v1/notifications/unread-count']['get'] = 'api/notifications/unread_count';
+$route['api/v1/notifications/(:num)/read']['post'] = 'api/notifications/mark_read/$1';
+$route['api/v1/notifications/read-all']['post']    = 'api/notifications/mark_all_read';
+$route['api/v1/notifications/register-device']['post'] = 'api/notifications/register_device';
+
+// Chat (JWT — user or guide)
+$route['api/v1/chat/threads']['get']                       = 'api/chat/threads';
+$route['api/v1/chat/threads']['post']                      = 'api/chat/ensure_thread';
+$route['api/v1/chat/threads/(:num)/messages']['get']       = 'api/chat/messages/$1';
+$route['api/v1/chat/threads/(:num)/messages']['post']      = 'api/chat/send/$1';
+$route['api/v1/chat/threads/(:num)/read']['post']          = 'api/chat/read/$1';
+
+// Customer dashboard
+$route['api/v1/dashboard']['get']                  = 'api/dashboard/index';
+
+// Guide onboarding (guide JWT)
+$route['api/v1/guide/onboarding/document']['post']     = 'api/guide_onboarding/document';
+$route['api/v1/guide/onboarding/bank-account']['post'] = 'api/guide_onboarding/bank_account';
+$route['api/v1/guide/onboarding/availability']['post'] = 'api/guide_onboarding/availability';
+$route['api/v1/guide/onboarding/status']['get']        = 'api/guide_onboarding/status';
+
+// Coupons (JWT — quote against an amount before checkout)
+$route['api/v1/coupons/quote']['post']             = 'api/coupons/quote';
+
+// Platform config
+$route['api/v1/platform/config']['get']            = 'api/platform_config/public_config';
+$route['api/v1/admin/platform/config']['get']      = 'api/platform_config/admin_index';
+$route['api/v1/admin/platform/config']['put']      = 'api/platform_config/admin_update';
+
+// SEO overrides
+$route['api/v1/seo']['get']                        = 'api/seo/index';
+$route['api/v1/admin/seo']['get']                  = 'api/seo/admin_index';
+$route['api/v1/admin/seo']['put']                  = 'api/seo/admin_upsert';
+
+// Elasticsearch admin tools
+$route['api/v1/admin/elastic/ensure-indices']['post']       = 'api/elastic/ensure_indices';
+$route['api/v1/admin/elastic/reindex/astrologers']['post']  = 'api/elastic/reindex_astrologers';
+$route['api/v1/admin/elastic/reindex/pujas']['post']        = 'api/elastic/reindex_pujas';
+$route['api/v1/admin/elastic/reindex/articles']['post']     = 'api/elastic/reindex_articles';
 
 // Migration runner (visit in browser to run / seed)
 $route['migrate']['get']      = 'migrate/index';

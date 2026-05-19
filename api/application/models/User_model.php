@@ -9,7 +9,7 @@ class User_model extends CI_Model
     {
         $row = $this->db->get_where($this->table, ['id' => $id])->row_array();
         if (!$row) return null;
-        unset($row['otp_hash'], $row['otp_expires_at']);
+        unset($row['otp_hash'], $row['otp_expires_at'], $row['password_hash']);
         return $row;
     }
 
@@ -19,7 +19,24 @@ class User_model extends CI_Model
         return $row ?: null;
     }
 
-    public function upsert_by_phone(array $data): int
+    public function by_email(string $email): ?array
+    {
+        $row = $this->db->get_where($this->table, ['email' => $email])->row_array();
+        return $row ?: null;
+    }
+
+    /** Verify admin email + password. Returns sanitized user array or null. */
+    public function verify_admin_password(string $email, string $password): ?array
+    {
+        $row = $this->by_email($email);
+        if (!$row || $row['role'] !== 'admin' || empty($row['password_hash'])) return null;
+        if (!password_verify($password, $row['password_hash'])) return null;
+        $this->db->update($this->table, ['last_login_at' => date('Y-m-d H:i:s')], ['id' => $row['id']]);
+        unset($row['otp_hash'], $row['otp_expires_at'], $row['password_hash']);
+        return $row;
+    }
+
+    public function upsert_by_phone(array $data, string $role = 'user'): int
     {
         $existing = $this->by_phone($data['phone']);
         if ($existing) {
@@ -33,8 +50,8 @@ class User_model extends CI_Model
         $this->db->insert($this->table, [
             'name'       => $data['name'],
             'phone'      => $data['phone'],
-            'email'      => $data['email'] ?? '',
-            'role'       => 'user',
+            'email'      => $data['email'] ?? null,
+            'role'       => $role,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
         return (int) $this->db->insert_id();

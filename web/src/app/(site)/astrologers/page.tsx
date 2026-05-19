@@ -8,7 +8,7 @@ import { Search } from "lucide-react";
 export const metadata: Metadata = buildMetadata({
   title: "Talk to Verified Astrologers — Vedic, Numerology, Vasthu, Jothisyam",
   description:
-    "Browse 100+ verified Vedic astrologers, numerologists, vasthu experts and Tamil jothidars on Mileora. Live consultation by call or video, satisfaction guaranteed.",
+    "Browse 100+ verified Vedic astrologers, numerologists, vasthu guides and Tamil jothidars on Mileora. Live consultation by call or video, satisfaction guaranteed.",
   path: "/astrologers",
 });
 
@@ -27,13 +27,13 @@ export default function AstrologersList() {
         <div className="absolute -top-40 left-1/2 -z-10 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(91,58,160,0.25),transparent)]" />
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--color-gold-300)]">
-            All experts are background-checked
+            All guides are background-checked
           </p>
           <h1 className="mt-3 font-[family-name:var(--font-cormorant)] text-5xl leading-tight tracking-tight sm:text-6xl">
             Talk to a <span className="text-gradient-gold">verified astrologer</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-[color:var(--color-text-muted)]">
-            100+ scripture-trained experts across Vedic, jothisyam, numerology and vasthu. Filter by language, specialty, and price — book in under a minute.
+            100+ scripture-trained guides across Vedic, jothisyam, numerology and vasthu. Filter by language, specialty, and price — book in under a minute.
           </p>
         </div>
       </section>

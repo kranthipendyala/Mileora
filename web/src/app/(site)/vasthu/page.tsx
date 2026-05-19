@@ -6,7 +6,7 @@ import { ServicePage } from "@/components/service/service-page";
 export const metadata: Metadata = buildMetadata({
   title: "Vasthu Shastra — Home & Office Energy Audit",
   description:
-    "Compass-based vasthu audit for your home or office. Practical, no-demolition fixes from verified vasthu experts on Mileora.",
+    "Compass-based vasthu audit for your home or office. Practical, no-demolition fixes from verified vasthu guides on Mileora.",
   path: "/vasthu",
 });
 
@@ -29,7 +29,7 @@ export default function VasthuPage() {
       ]}
       process={[
         { step: "Share your floor plan", desc: "Upload a sketch or floor plan. We also need a compass photo (or your phone's compass screenshot) for accurate orientation." },
-        { step: "Live walkthrough", desc: "60-min video call where the vasthu expert walks through each room with you." },
+        { step: "Live walkthrough", desc: "60-min video call where the vasthu guide walks through each room with you." },
         { step: "Receive your report", desc: "Detailed PDF with annotated diagrams, prioritized fixes, and remedies — most under ₹2,000 to implement." },
       ]}
       pricing={[
@@ -56,7 +56,7 @@ export default function VasthuPage() {
       faqs={[
         { q: "Will I have to break walls or relocate doors?", a: "Almost never. 90% of vasthu doshas can be balanced with mirrors, colors, plants, crystals, or repositioning furniture. We only suggest structural changes for serious doshas in homes you're still building." },
         { q: "Does vasthu work for apartments?", a: "Yes — apartment vasthu focuses on internal layout (door, kitchen, bedroom orientation, pooja zone). The building's overall vasthu is set, but you have lots of agency inside your unit." },
-        { q: "Is vasthu compatible with modern interior design?", a: "Completely. Our experts work with your design vocabulary — modern, minimalist, traditional — to find solutions that don't compromise your aesthetic." },
+        { q: "Is vasthu compatible with modern interior design?", a: "Completely. Our guides work with your design vocabulary — modern, minimalist, traditional — to find solutions that don't compromise your aesthetic." },
         { q: "Do you do on-site visits?", a: "Yes for office/commercial in metro cities (Chennai, Bengaluru, Mumbai, Delhi NCR, Hyderabad, Pune). Residential is video-first by default — works just as well." },
       ]}
     />

@@ -29,7 +29,7 @@ export default function AstrologyPage() {
       ]}
       process={[
         { step: "Share birth details", desc: "Date, exact time, and city of birth — that's all we need to cast your chart." },
-        { step: "Match with an expert", desc: "We pair you with a verified astrologer who specializes in your concern + speaks your language." },
+        { step: "Match with a guide", desc: "We pair you with a verified astrologer who specializes in your concern + speaks your language." },
         { step: "Live reading + report", desc: "30–60 min live consultation on call/video, plus a written PDF and 7-day follow-up." },
       ]}
       pricing={[

@@ -6,7 +6,7 @@ import { ServicePage } from "@/components/service/service-page";
 export const metadata: Metadata = buildMetadata({
   title: "Numerology — Life Path, Destiny & Lucky Numbers",
   description:
-    "Decode your life path, destiny, and lucky numbers from your name and date of birth. Free instant numerology reading + expert consultation on Mileora.",
+    "Decode your life path, destiny, and lucky numbers from your name and date of birth. Free instant numerology reading + guide consultation on Mileora.",
   path: "/numerology",
 });
 
@@ -30,7 +30,7 @@ export default function NumerologyPage() {
       process={[
         { step: "Enter your name + DOB", desc: "Use the name on your birth certificate. We compute every number in seconds." },
         { step: "Read your free report", desc: "Instant breakdown of your core numbers and what each one means for you." },
-        { step: "Talk to an expert", desc: "Optional 30-minute consultation with a numerology specialist for nuance + remedies." },
+        { step: "Talk to a guide", desc: "Optional 30-minute consultation with a numerology specialist for nuance + remedies." },
       ]}
       pricing={[
         {
@@ -40,7 +40,7 @@ export default function NumerologyPage() {
           cta: "Generate free report",
         },
         {
-          label: "Expert Consultation",
+          label: "Guide Consultation",
           price: "₹799",
           bullets: ["30-min live session", "Name-correction guidance", "Personal-year forecast PDF", "7-day chat follow-up"],
           cta: "Book consultation",
@@ -54,7 +54,7 @@ export default function NumerologyPage() {
         },
       ]}
       faqs={[
-        { q: "Which numerology system do you use?", a: "We use the Pythagorean system by default (most widely understood) but our experts can also read in the Chaldean tradition on request." },
+        { q: "Which numerology system do you use?", a: "We use the Pythagorean system by default (most widely understood) but our guides can also read in the Chaldean tradition on request." },
         { q: "Should I change my name based on numerology?", a: "Only if it resonates with you. We suggest spelling tweaks rather than full changes — a single letter often shifts the vibration enough." },
         { q: "Does the time of birth matter for numerology?", a: "Numerology only needs your date of birth. Time is required for astrology/kundli, not numerology." },
         { q: "Can numerology really help my business?", a: "It's one input, not the whole picture — but choosing a brand name and launch date with favorable vibrations costs nothing extra and many founders swear by it." },

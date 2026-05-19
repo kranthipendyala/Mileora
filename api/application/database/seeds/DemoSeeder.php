@@ -7,9 +7,26 @@ class DemoSeeder
 
     public function run(): void
     {
+        $this->seed_admin();
         $this->seed_astrologers();
         $this->seed_pujas();
         $this->seed_articles();
+    }
+
+    private function seed_admin(): void
+    {
+        $email = 'admin@mileora.com';
+        $existing = $this->db->get_where('users', ['email' => $email])->row_array();
+        if ($existing) return;
+        $this->db->insert('users', [
+            'name'          => 'Mileora Admin',
+            'phone'         => '9000000000',
+            'email'         => $email,
+            'role'          => 'admin',
+            'password_hash' => password_hash('mileora-admin-2026', PASSWORD_BCRYPT),
+            'created_at'    => date('Y-m-d H:i:s'),
+        ]);
+        log_message('info', "DemoSeeder: created admin {$email} / mileora-admin-2026");
     }
 
     private function seed_astrologers(): void

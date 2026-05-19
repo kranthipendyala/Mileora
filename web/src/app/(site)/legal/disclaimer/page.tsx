@@ -30,7 +30,7 @@ export default function Disclaimer() {
 
       <h2>2. Outcomes</h2>
       <p>
-        Outcomes from spiritual guidance vary across individuals and cannot be guaranteed. Mileora and its astrologers do not promise specific results — we promise sincere, scripture-rooted readings from verified experts.
+        Outcomes from spiritual guidance vary across individuals and cannot be guaranteed. Mileora and its astrologers do not promise specific results — we promise sincere, scripture-rooted readings from verified guides.
       </p>
 
       <h2>3. Astrologer independence</h2>

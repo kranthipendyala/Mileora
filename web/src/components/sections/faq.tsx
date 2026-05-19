@@ -19,7 +19,7 @@ const HOME_FAQS = [
   },
   {
     q: "Can I talk to an astrologer in Tamil or Hindi?",
-    a: "Yes — filter astrologers by language. Most of our experts offer consultations in English, Tamil, Hindi, Telugu, Kannada, or Malayalam.",
+    a: "Yes — filter astrologers by language. Most of our guides offer consultations in English, Tamil, Hindi, Telugu, Kannada, or Malayalam.",
   },
 ];
 

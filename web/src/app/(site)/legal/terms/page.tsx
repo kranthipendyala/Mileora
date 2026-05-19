@@ -18,7 +18,7 @@ export default function Terms() {
 
       <h2>1. Who we are</h2>
       <p>
-        &ldquo;Mileora&rdquo; (we, us, our) is a service-booking and lead-generation platform connecting seekers with verified astrologers, numerologists, vasthu experts, Tamil jothidars, and online puja providers. Mileora is operated by Magnus Conference (&ldquo;the Company&rdquo;), based in India.
+        &ldquo;Mileora&rdquo; (we, us, our) is a service-booking and lead-generation platform connecting seekers with verified astrologers, numerologists, vasthu guides, Tamil jothidars, and online puja providers. Mileora is operated by Magnus Conference (&ldquo;the Company&rdquo;), based in India.
       </p>
 
       <h2>2. Eligibility</h2>
@@ -26,7 +26,7 @@ export default function Terms() {
 
       <h2>3. Services</h2>
       <h3>Consultations</h3>
-      <p>Astrologer consultations are delivered by independent experts. Mileora curates and verifies them but does not guarantee specific outcomes.</p>
+      <p>Astrologer consultations are delivered by independent guides. Mileora curates and verifies them but does not guarantee specific outcomes.</p>
       <h3>Online pujas</h3>
       <p>Pujas are performed at the listed temples by hereditary or temple-appointed priests. We arrange live streaming and prasad delivery as part of the booking.</p>
       <h3>Reports</h3>
@@ -56,7 +56,7 @@ export default function Terms() {
 
       <h2>8. Limitation of liability</h2>
       <p>
-        Astrology, numerology, vasthu and jothisyam are spiritual sciences and should not replace professional medical, legal, financial or psychological advice. Mileora and its experts are not liable for any decision you make based on a reading. To the fullest extent permitted by law, our total liability is limited to the amount you paid for the specific service in question.
+        Astrology, numerology, vasthu and jothisyam are spiritual sciences and should not replace professional medical, legal, financial or psychological advice. Mileora and its guides are not liable for any decision you make based on a reading. To the fullest extent permitted by law, our total liability is limited to the amount you paid for the specific service in question.
       </p>
 
       <h2>9. Governing law</h2>

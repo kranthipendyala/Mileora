@@ -11,6 +11,44 @@ use chriskacerguis\RestServer\RestController;
  *  - JWT decode helper
  *  - Server-key auth helper (for Next.js BFF -> CI3 calls)
  *  - Consistent JSON envelope helpers
+ *
+ * The @property annotations below tell IDEs about CI3's magic-loaded
+ * properties (Loader, DB, Input, etc. + every model/library we use).
+ * They have no runtime effect — pure static-analysis hints.
+ *
+ * @property CI_Loader             $load
+ * @property CI_DB_query_builder   $db
+ * @property CI_DB_forge           $dbforge
+ * @property CI_Input              $input
+ * @property CI_Output             $output
+ * @property CI_URI                $uri
+ * @property CI_Session            $session
+ * @property CI_Form_validation    $form_validation
+ * @property CI_Migration          $migration
+ *
+ * @property User_model              $User_model
+ * @property Astrologer_model        $Astrologer_model
+ * @property Puja_model              $Puja_model
+ * @property Booking_model           $Booking_model
+ * @property Payment_model           $Payment_model
+ * @property Lead_model              $Lead_model
+ * @property Guide_model             $Guide_model
+ * @property City_model              $City_model
+ * @property Locality_model          $Locality_model
+ * @property Address_model           $Address_model
+ * @property Review_model            $Review_model
+ * @property Notification_model      $Notification_model
+ * @property Otp_model               $Otp_model
+ * @property Device_token_model      $Device_token_model
+ * @property Chat_model              $Chat_model
+ * @property Coupon_model            $Coupon_model
+ * @property Setting_model           $Setting_model
+ * @property Seo_model               $Seo_model
+ *
+ * @property Jwt_lib                 $jwt_lib
+ * @property Razorpay_service        $razorpay_service
+ * @property Elasticsearch_service   $elasticsearch_service
+ * @property Fcm_lib                 $fcm_lib
  */
 class MY_Controller extends RestController
 {

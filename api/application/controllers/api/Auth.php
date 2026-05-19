@@ -65,6 +65,91 @@ class Auth extends MY_Controller
         $this->register();
     }
 
+    /** Guide phone-OTP send. Same as register() but tags the user as 'guide'. */
+    public function guide_send_otp()
+    {
+        $this->require_server_caller();
+        $in = $this->input_json();
+        $name  = trim((string) ($in['name'] ?? ''));
+        $phone = trim((string) ($in['phone'] ?? ''));
+
+        if (!preg_match('/^[6-9]\d{9}$/', $phone)) {
+            $this->fail('VALIDATION', 'Valid 10-digit phone required', 422);
+            return;
+        }
+
+        // Guide must already exist (i.e. have applied via /guide/register).
+        $existing = $this->User_model->by_phone($phone);
+        if (!$existing || $existing['role'] !== 'guide') {
+            $this->fail('NOT_GUIDE', 'No guide account found for this phone. Please apply first.', 404);
+            return;
+        }
+
+        $otp = $this->User_model->issue_otp((int) $existing['id']);
+        log_message('debug', "Guide OTP for {$phone}: {$otp}");
+        $this->ok(['user_id' => (int) $existing['id'], 'otp_sent' => true]);
+    }
+
+    /** Guide verify-OTP — returns JWT scoped to guide role. */
+    public function guide_verify()
+    {
+        $this->require_server_caller();
+        $in = $this->input_json();
+        $user_id = (int) ($in['user_id'] ?? 0);
+        $otp     = trim((string) ($in['otp'] ?? ''));
+
+        if (!$user_id || !preg_match('/^\d{4,6}$/', $otp)) {
+            $this->fail('VALIDATION', 'user_id and otp required', 422);
+            return;
+        }
+        if (!$this->User_model->verify_otp($user_id, $otp)) {
+            $this->fail('BAD_OTP', 'Incorrect or expired OTP', 401);
+            return;
+        }
+
+        $user = $this->User_model->find($user_id);
+        if (!$user || $user['role'] !== 'guide') {
+            $this->fail('NOT_GUIDE', 'Account is not a guide', 403);
+            return;
+        }
+
+        $token = $this->jwt_lib->encode([
+            'sub'   => $user_id,
+            'name'  => $user['name'],
+            'phone' => $user['phone'],
+            'role'  => 'guide',
+        ]);
+        $this->ok(['token' => $token, 'user' => $user]);
+    }
+
+    /** Admin email + password login — separate flow, no OTP. */
+    public function admin_login()
+    {
+        $this->require_server_caller();
+        $in = $this->input_json();
+        $email    = trim((string) ($in['email'] ?? ''));
+        $password = (string) ($in['password'] ?? '');
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($password) < 6) {
+            $this->fail('VALIDATION', 'Valid email + password (6+ chars) required', 422);
+            return;
+        }
+
+        $user = $this->User_model->verify_admin_password($email, $password);
+        if (!$user) {
+            $this->fail('BAD_CREDENTIALS', 'Email or password incorrect', 401);
+            return;
+        }
+
+        $token = $this->jwt_lib->encode([
+            'sub'   => (int) $user['id'],
+            'name'  => $user['name'],
+            'email' => $user['email'],
+            'role'  => 'admin',
+        ]);
+        $this->ok(['token' => $token, 'user' => $user]);
+    }
+
     public function refresh()
     {
         $claims = $this->require_user();

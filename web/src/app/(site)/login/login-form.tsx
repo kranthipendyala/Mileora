@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { setSession } from "@/lib/auth";
 
 export function LoginForm() {
+  const router = useRouter();
   const [step, setStep] = useState<"phone" | "otp">("phone");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
@@ -32,10 +35,17 @@ export function LoginForm() {
       return;
     }
     setSubmitting(true);
-    // TODO: call /api/auth/verify-otp -> CI3 /auth/verify-otp -> store JWT
+    // TODO: POST /api/auth/verify-otp -> CI3 /auth/verify-otp -> { token, profile }
+    // Demo mode: any 4-digit OTP signs in.
     setTimeout(() => {
+      setSession("user", "demo-user-jwt", {
+        id: 4821,
+        name: "Welcome back",
+        phone,
+        role: "user",
+      });
       setSubmitting(false);
-      setError("Backend not connected yet — wire up /api/auth/verify-otp to the CI3 API.");
+      router.push("/");
     }, 700);
   }
 

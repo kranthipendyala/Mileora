@@ -15,7 +15,7 @@ export function Hero() {
           <span className="text-gradient-gold">Mileora connects you to them.</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-[color:var(--color-text-muted)]">
-          Vedic astrology, numerology, vasthu, jothisyam, and online puja — guided by handpicked experts. Get your free
+          Vedic astrology, numerology, vasthu, jothisyam, and online puja — delivered by handpicked guides. Get your free
           kundli in 60 seconds, or talk to an astrologer right now.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">

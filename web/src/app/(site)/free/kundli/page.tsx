@@ -33,7 +33,7 @@ export default function FreeKundli() {
               Your <span className="text-gradient-gold">free Vedic kundli</span> — in 60 seconds
             </h1>
             <p className="mt-5 text-lg text-[color:var(--color-text-muted)]">
-              Enter your birth details and we'll cast your Vedic birth chart instantly. Includes rasi, navamsa, current dasha period, and a personalized snapshot from our experts.
+              Enter your birth details and we'll cast your Vedic birth chart instantly. Includes rasi, navamsa, current dasha period, and a personalized snapshot from our guides.
             </p>
             <ul className="mt-8 space-y-3 text-[color:var(--color-text)]">
               {[

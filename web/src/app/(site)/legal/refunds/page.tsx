@@ -26,7 +26,7 @@ export default function Refunds() {
 
       <h2>Satisfaction guarantee</h2>
       <p>
-        Not happy with your reading? Email us within 48 hours of the consultation. We will either rebook you with another expert <strong>free of charge</strong> or process a full refund — your choice.
+        Not happy with your reading? Email us within 48 hours of the consultation. We will either rebook you with another guide <strong>free of charge</strong> or process a full refund — your choice.
       </p>
 
       <h2>Online pujas</h2>

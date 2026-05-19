@@ -29,7 +29,13 @@ export default function Login() {
           <LoginForm />
         </div>
 
-        <p className="mt-6 text-center text-xs text-[color:var(--color-text-muted)]">
+        <p className="mt-6 text-center text-sm text-[color:var(--color-text-muted)]">
+          Are you a Mileora{" "}
+          <Link href="/guide/login" className="text-[color:var(--color-gold-100)] underline">guide</Link> or{" "}
+          <Link href="/admin/login" className="text-[color:var(--color-gold-100)] underline">admin</Link>?
+        </p>
+
+        <p className="mt-4 text-center text-xs text-[color:var(--color-text-muted)]">
           By continuing you agree to our{" "}
           <Link href="/legal/terms" className="text-[color:var(--color-gold-100)] underline">Terms</Link> and{" "}
           <Link href="/legal/privacy" className="text-[color:var(--color-gold-100)] underline">Privacy Policy</Link>.

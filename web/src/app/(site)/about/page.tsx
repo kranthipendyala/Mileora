@@ -7,13 +7,13 @@ import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 export const metadata: Metadata = buildMetadata({
   title: "About Mileora — Our Story",
   description:
-    "Mileora is a premium spiritual-services platform connecting seekers with verified astrologers, numerologists, vasthu experts, and sacred temple pujas across India.",
+    "Mileora is a premium spiritual-services platform connecting seekers with verified astrologers, numerologists, vasthu guides, and sacred temple pujas across India.",
   path: "/about",
 });
 
 const STATS = [
   { v: "1,00,000+", k: "Seekers guided" },
-  { v: "100+", k: "Verified experts" },
+  { v: "100+", k: "Verified guides" },
   { v: "30,000+", k: "Pujas delivered" },
   { v: "4.9 / 5", k: "Average rating" },
 ];

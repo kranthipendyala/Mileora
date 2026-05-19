@@ -35,7 +35,7 @@ const SERVICES = [
   {
     href: "/free/compatibility",
     title: "Match Compatibility",
-    desc: "Vedic kundli matching with 36-guna porutham. Free instant report plus detailed expert analysis.",
+    desc: "Vedic kundli matching with 36-guna porutham. Free instant report plus detailed guide analysis.",
     icon: Heart,
   },
 ];
@@ -52,7 +52,7 @@ export function Services() {
             Six paths to <span className="text-gradient-gold">cosmic clarity</span>
           </h2>
           <p className="mt-4 text-[color:var(--color-text-muted)]">
-            Every Mileora service is delivered by a verified expert and backed by a satisfaction guarantee.
+            Every Mileora service is delivered by a verified guide and backed by a satisfaction guarantee.
           </p>
         </div>
 

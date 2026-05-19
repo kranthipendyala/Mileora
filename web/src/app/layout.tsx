@@ -5,6 +5,7 @@ import { buildMetadata, SITE } from "@/lib/seo";
 import { JsonLd, orgJsonLd, websiteJsonLd } from "@/components/seo/json-ld";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { PublicChrome } from "@/components/layout/public-chrome";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const cormorant = Cormorant_Garamond({
@@ -28,9 +29,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en-IN" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="min-h-dvh bg-cosmic relative overflow-x-hidden">
         <JsonLd data={[orgJsonLd(), websiteJsonLd()]} />
-        <Header />
-        <main className="relative">{children}</main>
-        <Footer />
+        <PublicChrome header={<Header />} footer={<Footer />}>
+          {children}
+        </PublicChrome>
       </body>
     </html>
   );

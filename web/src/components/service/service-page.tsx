@@ -51,7 +51,7 @@ export function ServicePage(props: ServicePageProps) {
               href="/astrologers"
               className="rounded-md bg-[color:var(--color-gold-500)] px-6 py-3 text-base font-medium text-[color:var(--color-bg)] shadow-[var(--shadow-glow)] hover:bg-[color:var(--color-gold-300)]"
             >
-              Talk to an expert
+              Talk to a guide
             </Link>
             <Link
               href={`/free/${slug === "puja" ? "kundli" : slug}`}

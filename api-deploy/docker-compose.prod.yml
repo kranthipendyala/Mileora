@@ -1,0 +1,35 @@
+name: mileora-prod
+
+# Production-style stack — API container only. DB and ES expected to be
+# managed services (Elastic Cloud, DigitalOcean DB, AWS RDS) reachable
+# over the network via env vars in api.env.
+#
+# For a fully self-hosted stack incl. DB + ES, use infra/docker-compose.yml.
+
+services:
+  api:
+    build:
+      context: ..               # build from repo root so the Dockerfile can copy api/
+      dockerfile: api-deploy/Dockerfile
+    image: mileora/api:latest
+    container_name: mileora-api
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    env_file:
+      - api.env                 # copy api.env.example → api.env and fill in
+    volumes:
+      - api-logs:/var/log/nginx
+      - api-php-logs:/var/log/php
+      - api-uploads:/var/www/api/application/uploads
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "http://localhost/api/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  api-logs:
+  api-php-logs:
+  api-uploads:

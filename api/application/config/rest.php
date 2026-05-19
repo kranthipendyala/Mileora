@@ -24,9 +24,21 @@ $config['allowed_cors_headers'] = [
 $config['allowed_cors_methods'] = ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'];
 $config['check_cors']           = TRUE;
 $config['allow_any_cors_domain'] = FALSE;
+// Dev ports 3000–3010 are all whitelisted because Next.js falls forward to
+// the next available port when the previous one is held by an orphan process.
 $config['allowed_cors_origins'] = [
     'http://localhost:3000',
+    'http://localhost:3001',
+    'http://localhost:3002',
+    'http://localhost:3003',
+    'http://localhost:3004',
+    'http://localhost:3005',
+    'http://localhost:3006',
+    'http://localhost:3007',
+    'http://localhost:3008',
+    'http://localhost:3009',
+    'http://localhost:3010',
     'https://mileora.com',
-    'https://staging.mileora.com',
     'https://www.mileora.com',
+    'https://staging.mileora.com',
 ];

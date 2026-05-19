@@ -1,0 +1,13 @@
+{
+  "name": "mileora-api-wrapper",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Vercel serverless wrapper around the CodeIgniter 3 API. Adds edge caching, JWT forwarding, and uniform CORS.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@vercel/node": "^3.2.0"
+  }
+}

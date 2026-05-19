@@ -6,13 +6,29 @@ Premium spiritual-services platform for **astrology, numerology, vasthu, jothisy
 
 ```
 Mileora/
-├── web/        # Next.js 15 (App Router, TS, Tailwind v4)  → Vercel
-├── mobile/     # React Native (Expo) iOS + Android          → App Store / Play Store
-├── api/        # CodeIgniter 3 (PHP 8.1) REST API           → XAMPP / any PHP host
-├── shared/     # Shared TS contracts (consumed by web + mobile)
-├── infra/      # docker-compose: MySQL + Elasticsearch + Kibana + phpMyAdmin
-└── docs/       # Architecture, API spec, DB schema, SEO checklist
+├── web/             # Next.js 15 (App Router, TS, Tailwind v4)  → Vercel
+├── mobile/          # React Native (Expo) iOS + Android          → App Store / Play Store
+├── api/             # CodeIgniter 3 (PHP 8.1) REST API           → XAMPP / any PHP host
+├── shared/          # Shared TS contracts (consumed by web + mobile)
+│
+├── database/        # Canonical SQL schema + seed data (schema.sql, seed.sql)
+├── infra/           # Local dev — docker-compose: MySQL + Elasticsearch + Kibana + phpMyAdmin
+├── deploy/          # Production — Apache + PM2 + ecosystem.config + update.sh
+├── deploy-static/   # Static-export build for pure CDN hosting (Cloudflare Pages / S3)
+├── api-deploy/      # Containerized API — Dockerfile + nginx + php-fpm + supervisord
+├── api-wrapper/     # Vercel serverless proxy in front of CI3 (edge caching + CORS)
+├── design/          # Design system reference (palette, typography, components)
+└── docs/            # Architecture, API spec, DB schema, ES indices, SEO checklist
 ```
+
+**Three deploy shapes — pick what fits:**
+
+| Shape | Folders | When |
+|---|---|---|
+| **All-in-one VPS** | `deploy/` | Default. One Apache + PM2 + PHP-FPM box. ~$25/mo. |
+| **Edge + API box** | `api-wrapper/` + your CI3 box | Marketing site on Vercel, CI3 behind it. Lowest latency. |
+| **Containerized** | `api-deploy/` | If you want Kubernetes/Docker Swarm/Fargate. |
+| **Static CDN** | `deploy-static/` (marketing only) + `api-deploy/` (portals) | Maximum scale, cheapest. Two domains. |
 
 ## Tech stack
 

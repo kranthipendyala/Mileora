@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ShieldCheck, LayoutDashboard, Users, UserCog, Flame, FileText, ClipboardList, LogOut, Menu, X } from "lucide-react";
+import {
+  ShieldCheck, LayoutDashboard, Users, UserCog, Flame, FileText, ClipboardList,
+  Star, Tag, Search, Settings, LogOut, Menu, X,
+} from "lucide-react";
 import { isAuthed, getProfile, clearSession } from "@/lib/auth";
 
 const NAV = [
@@ -12,7 +15,11 @@ const NAV = [
   { href: "/admin/guides", label: "Guides", Icon: UserCog },
   { href: "/admin/pujas", label: "Pujas", Icon: Flame },
   { href: "/admin/leads", label: "Leads", Icon: ClipboardList },
+  { href: "/admin/reviews", label: "Reviews", Icon: Star },
+  { href: "/admin/coupons", label: "Coupons", Icon: Tag },
   { href: "/admin/articles", label: "Articles", Icon: FileText },
+  { href: "/admin/seo", label: "SEO", Icon: Search },
+  { href: "/admin/settings", label: "Settings", Icon: Settings },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

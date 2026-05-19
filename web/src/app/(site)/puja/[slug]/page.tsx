@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check, MapPin, Clock, Calendar } from "lucide-react";
+import { Check, MapPin, Clock } from "lucide-react";
 import { buildMetadata, SITE } from "@/lib/seo";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
-import { PUJAS, formatINR } from "@/lib/mock-data";
+import { PUJAS } from "@/lib/mock-data";
 import { siteUrl } from "@/lib/utils";
+import { PujaBookingCard } from "@/components/booking/puja-booking-card";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -99,45 +99,7 @@ export default async function PujaDetail({ params }: Props) {
 
           {/* Sticky booking card */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
-            <div className="rounded-2xl border border-[color:var(--color-gold-500)]/30 bg-[color:var(--color-surface)]/70 p-6 shadow-[var(--shadow-glow)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--color-gold-300)]">Book this puja</p>
-              <p className="mt-2 font-[family-name:var(--font-cormorant)] text-5xl text-gradient-gold">{formatINR(p.pricePaise)}</p>
-              <p className="text-sm text-[color:var(--color-text-muted)]">includes prasad delivery</p>
-
-              <div className="mt-6 space-y-3">
-                <label className="block">
-                  <span className="text-xs font-medium uppercase tracking-wider text-[color:var(--color-text-muted)]">Choose date</span>
-                  <div className="mt-1.5 flex items-center gap-2 rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-bg)]/60 px-3 py-2.5">
-                    <Calendar className="h-4 w-4 text-[color:var(--color-gold-300)]" aria-hidden />
-                    <input type="date" className="flex-1 bg-transparent text-sm text-[color:var(--color-text)] outline-none" />
-                  </div>
-                </label>
-                <label className="block">
-                  <span className="text-xs font-medium uppercase tracking-wider text-[color:var(--color-text-muted)]">Your name (sankalpam)</span>
-                  <input
-                    type="text"
-                    placeholder="Full name as per official ID"
-                    className="mt-1.5 w-full rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-bg)]/60 px-3 py-2.5 text-sm text-[color:var(--color-text)] outline-none focus:border-[color:var(--color-gold-500)]"
-                  />
-                </label>
-                <label className="block">
-                  <span className="text-xs font-medium uppercase tracking-wider text-[color:var(--color-text-muted)]">Gotra (optional)</span>
-                  <input
-                    type="text"
-                    placeholder="e.g. Bharadwaja"
-                    className="mt-1.5 w-full rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-bg)]/60 px-3 py-2.5 text-sm text-[color:var(--color-text)] outline-none focus:border-[color:var(--color-gold-500)]"
-                  />
-                </label>
-              </div>
-
-              <Link
-                href="#"
-                className="mt-6 block rounded-md bg-[color:var(--color-gold-500)] px-4 py-3 text-center text-base font-medium text-[color:var(--color-bg)] hover:bg-[color:var(--color-gold-300)]"
-              >
-                Book puja · {formatINR(p.pricePaise)}
-              </Link>
-              <p className="mt-3 text-center text-xs text-[color:var(--color-text-muted)]">Secure checkout via Razorpay</p>
-            </div>
+            <PujaBookingCard pricePaise={p.pricePaise} pujaName={p.name} />
           </aside>
         </div>
       </article>

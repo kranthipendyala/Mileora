@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
+import { HeaderActions } from "./header-actions";
 
 const NAV = [
   { href: "/astrology", label: "Astrology" },
@@ -29,20 +30,7 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-3">
-          <Link
-            href="/login"
-            className="hidden rounded-md px-3 py-2 text-sm text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)] sm:block"
-          >
-            Sign in
-          </Link>
-          <Link
-            href="/book"
-            className="rounded-md bg-[color:var(--color-gold-500)] px-4 py-2 text-sm font-medium text-[color:var(--color-bg)] hover:bg-[color:var(--color-gold-300)] transition-colors"
-          >
-            Book Now
-          </Link>
-        </div>
+        <HeaderActions />
       </div>
     </header>
   );

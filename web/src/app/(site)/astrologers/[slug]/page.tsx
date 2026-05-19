@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Star, Globe, GraduationCap, Clock, Video, Phone, MessageCircle } from "lucide-react";
+import { Star, Globe, GraduationCap } from "lucide-react";
 import { buildMetadata, SITE } from "@/lib/seo";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
-import { ASTROLOGERS, formatINR } from "@/lib/mock-data";
+import { ASTROLOGERS } from "@/lib/mock-data";
 import { siteUrl } from "@/lib/utils";
+import { AstrologerBookingCard } from "@/components/booking/astrologer-booking-card";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -127,48 +127,11 @@ export default async function AstrologerDetail({ params }: Props) {
 
           {/* Sticky booking */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
-            <div className="rounded-2xl border border-[color:var(--color-gold-500)]/30 bg-[color:var(--color-surface)]/70 p-6 shadow-[var(--shadow-glow)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--color-gold-300)]">Book a session</p>
-              <p className="mt-2 font-[family-name:var(--font-cormorant)] text-5xl text-gradient-gold">{formatINR(a.pricePaise)}</p>
-              <p className="text-sm text-[color:var(--color-text-muted)]">
-                <Clock className="mr-1 inline h-3.5 w-3.5 -translate-y-px" aria-hidden /> {a.sessionMinutes}-minute session
-              </p>
-
-              <div className="mt-5 grid grid-cols-3 gap-2">
-                {[{ Icon: Video, label: "Video" }, { Icon: Phone, label: "Voice" }, { Icon: MessageCircle, label: "Chat" }].map(({ Icon, label }) => (
-                  <button
-                    key={label}
-                    type="button"
-                    className="flex flex-col items-center gap-1 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-bg)]/60 py-3 text-xs text-[color:var(--color-text)] hover:border-[color:var(--color-gold-500)]"
-                  >
-                    <Icon className="h-4 w-4 text-[color:var(--color-gold-300)]" aria-hidden /> {label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="mt-5 space-y-2 text-sm">
-                <p className="text-xs font-medium uppercase tracking-wider text-[color:var(--color-text-muted)]">Pick a time today</p>
-                <div className="grid grid-cols-3 gap-2">
-                  {["10:30 AM", "12:00 PM", "2:30 PM", "4:00 PM", "6:30 PM", "8:00 PM"].map((t) => (
-                    <button
-                      key={t}
-                      type="button"
-                      className="rounded-md border border-[color:var(--color-border)] bg-[color:var(--color-bg)]/60 py-2 text-xs text-[color:var(--color-text)] hover:border-[color:var(--color-gold-500)] hover:text-[color:var(--color-gold-100)]"
-                    >
-                      {t}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <Link
-                href="#"
-                className="mt-6 block rounded-md bg-[color:var(--color-gold-500)] px-4 py-3 text-center text-base font-medium text-[color:var(--color-bg)] hover:bg-[color:var(--color-gold-300)]"
-              >
-                Continue · {formatINR(a.pricePaise)}
-              </Link>
-              <p className="mt-3 text-center text-xs text-[color:var(--color-text-muted)]">Free cancellation up to 1 hour before</p>
-            </div>
+            <AstrologerBookingCard
+              pricePaise={a.pricePaise}
+              sessionMinutes={a.sessionMinutes}
+              astrologerName={a.name}
+            />
           </aside>
         </div>
       </article>

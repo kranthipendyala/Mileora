@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { Sparkles, LayoutDashboard, Calendar, Wallet, User, LogOut, Menu, X } from "lucide-react";
+import { Sparkles, LayoutDashboard, Calendar, Tag, Wallet, User, LogOut, Menu, X } from "lucide-react";
 import { isAuthed, getProfile, clearSession } from "@/lib/auth";
 
 const NAV = [
   { href: "/guide", label: "Dashboard", Icon: LayoutDashboard },
   { href: "/guide/bookings", label: "Bookings", Icon: Calendar },
+  { href: "/guide/services", label: "Services", Icon: Tag },
   { href: "/guide/payouts", label: "Payouts", Icon: Wallet },
   { href: "/guide/profile", label: "Profile", Icon: User },
 ];

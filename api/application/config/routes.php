@@ -128,6 +128,19 @@ $route['api/v1/seo']['get']                        = 'api/seo/index';
 $route['api/v1/admin/seo']['get']                  = 'api/seo/admin_index';
 $route['api/v1/admin/seo']['put']                  = 'api/seo/admin_upsert';
 
+// Service catalog (public browse)
+$route['api/v1/categories']['get']                = 'api/categories/index';
+$route['api/v1/categories/(:any)']['get']         = 'api/categories/show/$1';
+$route['api/v1/services']['get']                  = 'api/services/browse';
+
+// Guide-side services (require guide JWT)
+$route['api/v1/guide/services']['get']                  = 'api/services/mine';
+$route['api/v1/guide/services']['post']                 = 'api/services/create';
+$route['api/v1/guide/services/(:num)']['put']           = 'api/services/update/$1';
+$route['api/v1/guide/services/(:num)']['delete']        = 'api/services/delete/$1';
+$route['api/v1/guide/services/(:num)/toggle']['post']   = 'api/services/toggle/$1';
+$route['api/v1/guide/services/bulk-replace']['post']    = 'api/services/bulk_replace';
+
 // Elasticsearch admin tools
 $route['api/v1/admin/elastic/ensure-indices']['post']       = 'api/elastic/ensure_indices';
 $route['api/v1/admin/elastic/reindex/astrologers']['post']  = 'api/elastic/reindex_astrologers';

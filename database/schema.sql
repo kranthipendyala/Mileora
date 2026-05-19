@@ -442,12 +442,67 @@ CREATE TABLE IF NOT EXISTS `seo_pages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- =================================================================
+-- 012 — services catalog (hierarchical categories + per-guide services)
+-- =================================================================
+CREATE TABLE IF NOT EXISTS `service_categories` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `parent_id` INT UNSIGNED NULL COMMENT 'NULL = top-level',
+  `name` VARCHAR(120) NOT NULL,
+  `slug` VARCHAR(140) NOT NULL,
+  `icon` VARCHAR(60) NULL COMMENT 'Lucide icon name (e.g. Sparkles, Calculator)',
+  `description` TEXT NULL,
+  `meta_title` VARCHAR(200) NULL,
+  `meta_description` TEXT NULL,
+  `sort_order` SMALLINT UNSIGNED DEFAULT 0,
+  `is_active` TINYINT UNSIGNED DEFAULT 1,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `svc_categories_slug_uq` (`slug`),
+  KEY `svc_categories_parent_ix` (`parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `guide_services` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `guide_id` INT UNSIGNED NOT NULL COMMENT 'users.id where role=guide',
+  `category_id` INT UNSIGNED NOT NULL,
+  `name` VARCHAR(200) NOT NULL COMMENT 'e.g. "30-min Vedic Birth Chart Reading"',
+  `slug` VARCHAR(220) NOT NULL,
+  `description` TEXT NULL,
+  `base_price_paise` INT UNSIGNED NOT NULL,
+  `discounted_price_paise` INT UNSIGNED NULL,
+  `price_unit` ENUM('fixed','per_session','per_hour','per_report') DEFAULT 'fixed',
+  `duration_minutes` SMALLINT UNSIGNED DEFAULT 30,
+  `delivery_mode` ENUM('video','voice','chat','in_person','async_report','online_puja') DEFAULT 'video',
+  `image_url` VARCHAR(500) NULL,
+  `sort_order` SMALLINT UNSIGNED DEFAULT 0,
+  `is_active` TINYINT UNSIGNED DEFAULT 1,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `guide_services_slug_uq` (`guide_id`, `slug`),
+  KEY `guide_services_lookup_ix` (`guide_id`, `category_id`),
+  KEY `guide_services_cat_ix` (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `guide_service_variants` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `service_id` INT UNSIGNED NOT NULL,
+  `name` VARCHAR(120) NOT NULL COMMENT 'e.g. "Quick 15-min" or "Deep 60-min"',
+  `price_paise` INT UNSIGNED NOT NULL,
+  `duration_minutes` SMALLINT UNSIGNED DEFAULT 30,
+  `is_active` TINYINT UNSIGNED DEFAULT 1,
+  `sort_order` SMALLINT UNSIGNED DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `guide_service_variants_svc_ix` (`service_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- =================================================================
 -- CI3 framework table (migrations tracking)
 -- =================================================================
 CREATE TABLE IF NOT EXISTS `migrations` (
   `version` BIGINT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `migrations` (`version`) VALUES (11) ON DUPLICATE KEY UPDATE `version` = 11;
+INSERT INTO `migrations` (`version`) VALUES (12) ON DUPLICATE KEY UPDATE `version` = 12;
 
 SET FOREIGN_KEY_CHECKS = 1;

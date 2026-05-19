@@ -1,46 +1,20 @@
 import Link from "next/link";
-import { Sparkles, Calculator, Home, Sun, Flame, Heart } from "lucide-react";
+import * as Lucide from "lucide-react";
+import { getActiveCategories } from "@/lib/categories";
 
-const SERVICES = [
-  {
-    href: "/astrology",
-    title: "Vedic Astrology",
-    desc: "Birth chart analysis, dasha periods, planetary remedies — rooted in 5,000-year-old jyotisha tradition.",
-    icon: Sparkles,
-  },
-  {
-    href: "/numerology",
-    title: "Numerology",
-    desc: "Decode your life path, destiny number, and lucky vibrations from your name and date of birth.",
-    icon: Calculator,
-  },
-  {
-    href: "/vasthu",
-    title: "Vasthu Shastra",
-    desc: "Align your home or office with cosmic energies. Compass-based vasthu audit and remedies.",
-    icon: Home,
-  },
-  {
-    href: "/jothisyam",
-    title: "Tamil Jothisyam",
-    desc: "South Indian Vedic astrology with rasi, navamsa, and traditional Tamil panchangam guidance.",
-    icon: Sun,
-  },
-  {
-    href: "/puja",
-    title: "Online Puja Booking",
-    desc: "Book authentic pujas at famous temples. Live stream, sankalpam in your name, prasad delivered home.",
-    icon: Flame,
-  },
-  {
-    href: "/free/compatibility",
-    title: "Match Compatibility",
-    desc: "Vedic kundli matching with 36-guna porutham. Free instant report plus detailed guide analysis.",
-    icon: Heart,
-  },
-];
+/**
+ * Home-page services section — now fully dynamic. Categories come from CI3
+ * (`GET /api/v1/categories`). When the API is unreachable, lib/categories.ts
+ * serves a static fallback that mirrors the seeded catalog so the home page
+ * never renders empty.
+ *
+ * The link target is `/services/[slug]` (the new dynamic browse page) instead
+ * of the legacy marketing pages — those still exist at /astrology etc. for SEO,
+ * but discovery now flows through the live catalog.
+ */
+export async function Services() {
+  const { rows: categories, live } = await getActiveCategories({ limit: 6 });
 
-export function Services() {
   return (
     <section className="px-4 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -49,7 +23,8 @@ export function Services() {
             What we offer
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-cormorant)] text-4xl tracking-tight sm:text-5xl">
-            Six paths to <span className="text-gradient-gold">cosmic clarity</span>
+            {categories.length === 1 ? "One path" : `${ordinal(categories.length)} paths`}{" "}
+            to <span className="text-gradient-gold">cosmic clarity</span>
           </h2>
           <p className="mt-4 text-[color:var(--color-text-muted)]">
             Every Mileora service is delivered by a verified guide and backed by a satisfaction guarantee.
@@ -57,12 +32,12 @@ export function Services() {
         </div>
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s) => {
-            const Icon = s.icon;
+          {categories.map((c) => {
+            const Icon = (Lucide as Record<string, React.ComponentType<{ className?: string }>>)[c.icon ?? "Sparkles"] ?? Lucide.Sparkles;
             return (
               <Link
-                key={s.href}
-                href={s.href}
+                key={c.slug}
+                href={`/services/${c.slug}`}
                 className="group relative overflow-hidden rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)]/60 p-7 shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:border-[color:var(--color-gold-500)]/60"
               >
                 <div className="absolute inset-x-0 -top-1 h-px bg-gradient-to-r from-transparent via-[color:var(--color-gold-500)]/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
@@ -70,9 +45,16 @@ export function Services() {
                   <Icon className="h-6 w-6 text-[color:var(--color-gold-300)]" aria-hidden />
                 </div>
                 <h3 className="mt-5 font-[family-name:var(--font-cormorant)] text-2xl text-[color:var(--color-text)]">
-                  {s.title}
+                  {c.name}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[color:var(--color-text-muted)]">{s.desc}</p>
+                <p className="mt-2 text-sm leading-relaxed text-[color:var(--color-text-muted)] line-clamp-3">
+                  {c.description ?? ""}
+                </p>
+                {c.active_guide_count !== undefined && c.active_guide_count > 0 && (
+                  <p className="mt-3 text-xs text-[color:var(--color-gold-100)]">
+                    {c.active_guide_count} verified guide{c.active_guide_count > 1 ? "s" : ""} available
+                  </p>
+                )}
                 <span className="mt-5 inline-flex items-center text-sm font-medium text-[color:var(--color-gold-100)]">
                   Explore
                   <svg
@@ -92,7 +74,25 @@ export function Services() {
             );
           })}
         </div>
+
+        <div className="mt-10 text-center">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-1 text-sm text-[color:var(--color-gold-100)] hover:underline"
+          >
+            See all services →
+          </Link>
+          {!live && (
+            <p className="mt-2 text-[10px] uppercase tracking-wider text-[color:var(--color-text-muted)]">
+              (Showing fallback catalog — CI3 backend not reachable)
+            </p>
+          )}
+        </div>
       </div>
     </section>
   );
+}
+
+function ordinal(n: number) {
+  return ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"][n] ?? String(n);
 }

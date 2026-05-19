@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -65,8 +66,27 @@ export default function GuideOnboarding() {
       </div>
 
       {allDone && (
-        <div className="mt-6 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 p-6 text-center text-emerald-200">
-          🙏 Onboarding submitted. Our team will review your KYC + bank details within 48 hours. You'll get an email + WhatsApp once approved.
+        <div className="mt-6 space-y-4">
+          <div className="rounded-2xl border border-emerald-400/30 bg-emerald-400/10 p-6 text-center text-emerald-200">
+            🙏 Onboarding submitted. Our team will review your KYC + bank details within 48 hours.
+          </div>
+          <div className="rounded-2xl border border-[color:var(--color-gold-500)]/40 bg-[color:var(--color-gold-500)]/5 p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[color:var(--color-gold-300)]">
+              While you wait
+            </p>
+            <h3 className="mt-2 font-[family-name:var(--font-cormorant)] text-2xl text-[color:var(--color-text)]">
+              Declare what services you offer
+            </h3>
+            <p className="mt-2 text-sm text-[color:var(--color-text-muted)]">
+              Add at least one service (e.g. "30-min Vedic Reading" at ₹999) so seekers can find and book you the moment your KYC is approved.
+            </p>
+            <Link
+              href="/guide/services"
+              className="mt-4 inline-block rounded-md bg-[color:var(--color-gold-500)] px-5 py-2.5 text-sm font-medium text-[color:var(--color-bg)] hover:bg-[color:var(--color-gold-300)]"
+            >
+              Add my services →
+            </Link>
+          </div>
         </div>
       )}
     </>

@@ -134,6 +134,47 @@ UNION ALL SELECT id, 'Delhi',     'new-delhi', 1, 28.6139, 77.2090 FROM `states`
 UNION ALL SELECT id, 'Varanasi',  'varanasi',  1, 25.3176, 82.9739 FROM `states` WHERE `slug` = 'uttar-pradesh';
 
 -- =================================================================
+-- STARTER SERVICE CATEGORIES (canonical catalog)
+-- =================================================================
+INSERT IGNORE INTO `service_categories` (`name`, `slug`, `icon`, `sort_order`, `is_active`, `description`, `meta_title`, `meta_description`) VALUES
+  ('Vedic Astrology',  'astrology',       'Sparkles',   1, 1,
+   'Birth chart analysis, dasha periods, planetary remedies from verified Vedic astrologers.',
+   'Vedic Astrology — Birth Chart, Dasha & Remedies',
+   'Authentic Vedic astrology readings on Mileora. Get your kundli analyzed, understand dasha periods, and receive personalized remedies.'),
+  ('Numerology',       'numerology',      'Calculator', 2, 1,
+   'Life path, destiny, soul-urge numbers and lucky vibrations from your name and date of birth.',
+   'Numerology — Life Path, Destiny & Lucky Numbers',
+   'Decode your life path, destiny, and lucky numbers. Free instant numerology reading + expert consultation.'),
+  ('Vasthu Shastra',   'vasthu',          'Home',       3, 1,
+   'Compass-based vasthu audit for your home or office. Practical, no-demolition fixes.',
+   'Vasthu Shastra — Home & Office Energy Audit',
+   'Compass-based vasthu audit for your home or office. Practical fixes from verified vasthu experts on Mileora.'),
+  ('Tamil Jothisyam',  'jothisyam',       'Sun',        4, 1,
+   'South Indian Vedic astrology with rasi, navamsa, and traditional Tamil panchangam guidance.',
+   'Tamil Jothisyam — South Indian Vedic Astrology',
+   'Authentic Tamil jothisyam readings — rasi, navamsa, traditional Tamil panchangam guidance from verified jothidars.'),
+  ('Online Puja',      'puja',            'Flame',      5, 1,
+   'Authentic pujas at famous temples, live streamed in your name with prasad delivery.',
+   'Online Puja Booking — Authentic Rituals at Famous Temples',
+   'Book authentic pujas at India''s most sacred temples — live stream, sankalpam in your name, prasad delivered.'),
+  ('Kundli Matching',  'kundli-matching', 'Heart',      6, 1,
+   'Vedic kundli matching with 36-guna porutham — for marriage compatibility.',
+   'Kundli Matching — 36 Guna Porutham',
+   'Free Vedic kundli matching with 36-guna porutham analysis. Check compatibility for marriage instantly.'),
+  ('Tarot Reading',    'tarot',           'Layers',     7, 1,
+   'Tarot card readings for love, career, and decision-making clarity.',
+   'Tarot Reading — Love, Career & Life Guidance',
+   'Tarot card readings on Mileora — love, career, and life-decision clarity from verified tarot readers.'),
+  ('Daily Horoscope',  'horoscope',       'Star',       8, 1,
+   'Personalized daily, weekly, and monthly horoscopes by your rasi.',
+   'Daily Horoscope — All 12 Zodiac Signs',
+   'Daily horoscope for all 12 zodiac signs — Vedic + Western readings, updated every morning.'),
+  ('Remedial Pujas',   'remedial-pujas',  'Sparkle',    9, 1,
+   'Custom remedial pujas for planetary doshas, navagraha shanti, and pitru tarpanam.',
+   'Remedial Pujas — Navagraha Shanti, Dosha Nivaran',
+   'Custom remedial pujas for planetary doshas — performed at the most relevant temple in your name.');
+
+-- =================================================================
 -- STARTER COUPONS
 -- =================================================================
 INSERT IGNORE INTO `coupons`

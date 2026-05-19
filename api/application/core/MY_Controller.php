@@ -44,6 +44,8 @@ use chriskacerguis\RestServer\RestController;
  * @property Coupon_model            $Coupon_model
  * @property Setting_model           $Setting_model
  * @property Seo_model               $Seo_model
+ * @property Service_category_model  $Service_category_model
+ * @property Guide_service_model     $Guide_service_model
  *
  * @property Jwt_lib                 $jwt_lib
  * @property Razorpay_service        $razorpay_service

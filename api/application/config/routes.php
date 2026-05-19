@@ -40,6 +40,7 @@ $route['api/v1/admin/guides/(:num)/approve']['post'] = 'api/admin/approve_guide/
 // Astrologers
 $route['api/v1/astrologers']['get']                    = 'api/astrologers/index';
 $route['api/v1/astrologers/(:any)']['get']             = 'api/astrologers/show/$1';
+$route['api/v1/astrologers/(:any)/services']['get']    = 'api/astrologers/services/$1';
 $route['api/v1/astrologers/(:any)/reviews']['get']     = 'api/astrologers/reviews/$1';
 $route['api/v1/astrologers/(:any)/reviews']['post']    = 'api/astrologers/add_review/$1';
 
@@ -132,6 +133,12 @@ $route['api/v1/admin/seo']['put']                  = 'api/seo/admin_upsert';
 $route['api/v1/categories']['get']                = 'api/categories/index';
 $route['api/v1/categories/(:any)']['get']         = 'api/categories/show/$1';
 $route['api/v1/services']['get']                  = 'api/services/browse';
+
+// Admin: category catalog CRUD
+$route['api/v1/admin/categories']['get']           = 'api/categories/admin_index';
+$route['api/v1/admin/categories']['post']          = 'api/categories/admin_create';
+$route['api/v1/admin/categories/(:num)']['put']    = 'api/categories/admin_update/$1';
+$route['api/v1/admin/categories/(:num)']['delete'] = 'api/categories/admin_delete/$1';
 
 // Guide-side services (require guide JWT)
 $route['api/v1/guide/services']['get']                  = 'api/services/mine';

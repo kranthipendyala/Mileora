@@ -39,6 +39,17 @@ class Astrologers extends MY_Controller
         $this->ok($row);
     }
 
+    public function services($slug = null)
+    {
+        $astrologer = $this->Astrologer_model->by_slug((string) $slug);
+        if (!$astrologer) {
+            $this->fail('NOT_FOUND', 'Astrologer not found', 404);
+            return;
+        }
+        $this->load->model('Guide_service_model');
+        $this->ok($this->Guide_service_model->by_astrologer_slug((string) $slug));
+    }
+
     public function reviews($slug = null)
     {
         $astrologer = $this->Astrologer_model->by_slug((string) $slug);

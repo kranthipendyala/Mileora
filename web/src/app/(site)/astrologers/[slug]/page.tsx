@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Star, Globe, GraduationCap } from "lucide-react";
+import { Star, Globe, GraduationCap, Clock } from "lucide-react";
 import { buildMetadata, SITE } from "@/lib/seo";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
-import { ASTROLOGERS } from "@/lib/mock-data";
+import { ASTROLOGERS, formatINR } from "@/lib/mock-data";
 import { siteUrl } from "@/lib/utils";
 import { AstrologerBookingCard } from "@/components/booking/astrologer-booking-card";
+import { getServicesForAstrologer } from "@/lib/services";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -31,6 +32,8 @@ export default async function AstrologerDetail({ params }: Props) {
   const { slug } = await params;
   const a = ASTROLOGERS.find((x) => x.slug === slug);
   if (!a) notFound();
+
+  const { rows: services } = await getServicesForAstrologer(slug);
 
   const personLd = {
     "@context": "https://schema.org",
@@ -100,6 +103,42 @@ export default async function AstrologerDetail({ params }: Props) {
               </div>
             </div>
 
+            {/* Services & pricing */}
+            {services.length > 0 && (
+              <div className="mt-12">
+                <h2 className="font-[family-name:var(--font-cormorant)] text-3xl">Services &amp; pricing</h2>
+                <p className="mt-1 text-sm text-[color:var(--color-text-muted)]">
+                  Choose what you'd like — full details in the booking panel.
+                </p>
+                <ul className="mt-5 divide-y divide-[color:var(--color-border)]/60 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)]/60">
+                  {services.map((s) => {
+                    const price = s.discounted_price_paise ?? s.base_price_paise;
+                    const isDiscounted = s.discounted_price_paise && s.discounted_price_paise < s.base_price_paise;
+                    return (
+                      <li key={s.id} className="flex items-start justify-between gap-4 px-5 py-4">
+                        <div className="min-w-0">
+                          <p className="text-xs uppercase tracking-wider text-[color:var(--color-gold-300)]">{s.category_name}</p>
+                          <p className="mt-1 font-medium text-[color:var(--color-text)]">{s.name}</p>
+                          {s.description && (
+                            <p className="mt-1 line-clamp-2 text-sm text-[color:var(--color-text-muted)]">{s.description}</p>
+                          )}
+                          <p className="mt-2 inline-flex items-center gap-1 text-xs text-[color:var(--color-text-muted)]">
+                            <Clock className="h-3 w-3" aria-hidden /> {s.duration_minutes} min · {s.delivery_mode.replace("_", " ")}
+                          </p>
+                        </div>
+                        <div className="text-right shrink-0">
+                          {isDiscounted && (
+                            <p className="text-xs text-[color:var(--color-text-muted)] line-through">{formatINR(s.base_price_paise)}</p>
+                          )}
+                          <p className="font-[family-name:var(--font-cormorant)] text-2xl text-gradient-gold">{formatINR(price)}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+
             {/* Sample reviews */}
             <div className="mt-12">
               <h2 className="font-[family-name:var(--font-cormorant)] text-3xl">Recent reviews</h2>
@@ -128,8 +167,7 @@ export default async function AstrologerDetail({ params }: Props) {
           {/* Sticky booking */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <AstrologerBookingCard
-              pricePaise={a.pricePaise}
-              sessionMinutes={a.sessionMinutes}
+              services={services}
               astrologerName={a.name}
             />
           </aside>

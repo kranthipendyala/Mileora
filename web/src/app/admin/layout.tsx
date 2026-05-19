@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ShieldCheck, LayoutDashboard, Users, UserCog, Flame, FileText, ClipboardList,
-  Star, Tag, Search, Settings, LogOut, Menu, X,
+  Star, Tag, Layers, Search, Settings, LogOut, Menu, X,
 } from "lucide-react";
 import { isAuthed, getProfile, clearSession } from "@/lib/auth";
 
@@ -13,6 +13,7 @@ const NAV = [
   { href: "/admin", label: "Overview", Icon: LayoutDashboard },
   { href: "/admin/users", label: "Users", Icon: Users },
   { href: "/admin/guides", label: "Guides", Icon: UserCog },
+  { href: "/admin/categories", label: "Categories", Icon: Layers },
   { href: "/admin/pujas", label: "Pujas", Icon: Flame },
   { href: "/admin/leads", label: "Leads", Icon: ClipboardList },
   { href: "/admin/reviews", label: "Reviews", Icon: Star },

@@ -23,6 +23,21 @@ class Guide_service_model extends CI_Model
             ->get()->result_array();
     }
 
+    /** Active services for the guide linked to a public astrologer profile. */
+    public function by_astrologer_slug(string $astrologer_slug): array
+    {
+        return $this->db->query("
+            SELECT s.*,
+                   c.name AS category_name, c.slug AS category_slug, c.icon AS category_icon
+            FROM guide_services s
+            INNER JOIN service_categories c ON c.id = s.category_id
+            INNER JOIN users u             ON u.id = s.guide_id AND u.role = 'guide'
+            INNER JOIN astrologers a       ON a.id = u.astrologer_id AND a.slug = ?
+            WHERE s.is_active = 1
+            ORDER BY c.sort_order ASC, s.sort_order ASC, s.base_price_paise ASC
+        ", [$astrologer_slug])->result_array();
+    }
+
     /** Public browse: active services in a category, optionally filtered by city/language via guide. */
     public function by_category(string $category_slug, int $limit = 60, int $offset = 0): array
     {

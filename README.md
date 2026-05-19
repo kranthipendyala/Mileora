@@ -7,9 +7,10 @@ Premium spiritual-services platform for **astrology, numerology, vasthu, jothisy
 ```
 Mileora/
 ├── web/             # Next.js 15 (App Router, TS, Tailwind v4)  → Vercel
-├── mobile/          # React Native (Expo) iOS + Android          → App Store / Play Store
+├── mobile/          # React Native (Expo) — customer app          → App Store / Play Store (com.mileora.app)
+├── guide-app/       # React Native (Expo) — guide/operator app    → App Store / Play Store (com.mileora.guide)
 ├── api/             # CodeIgniter 3 (PHP 8.1) REST API           → XAMPP / any PHP host
-├── shared/          # Shared TS contracts (consumed by web + mobile)
+├── shared/          # Shared TS contracts (consumed by all clients)
 │
 ├── database/        # Canonical SQL schema + seed data (schema.sql, seed.sql)
 ├── infra/           # Local dev — docker-compose: MySQL + Elasticsearch + Kibana + phpMyAdmin
